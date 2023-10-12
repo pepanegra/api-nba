@@ -146,6 +146,8 @@ app.use((req, res) => {
   });
 });
 
-app.listen(3000, () => {
-  console.log(`servidor corriendo en el puerto ${3000}`);
+const port = process.env.PORT || 5000
+
+app.listen(port, () => {
+  console.log(`servidor corriendo en el puerto ${port}`);
 });
