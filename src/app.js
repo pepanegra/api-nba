@@ -51,6 +51,7 @@ app.post("/player", async (req, res) => {
     rebotes_por_partido,
     asistencias_por_partido,
     eficiencia,
+    imagen,
   } = req.body;
   if (typeof nombre !== "string")
     res.status(400).json({
@@ -59,8 +60,8 @@ app.post("/player", async (req, res) => {
   try {
     const result = await pool.query(
       `
-        INSERT INTO jugadores_nba(nombre, equipo, posicion, altura, peso, edad, nacionalidad, colegio, draft, puntos_por_partido, rebotes_por_partido, asistencias_por_partido, eficiencia)
-        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)
+        INSERT INTO jugadores_nba(nombre, equipo, posicion, altura, peso, edad, nacionalidad, colegio, draft, puntos_por_partido, rebotes_por_partido, asistencias_por_partido, eficiencia, imagen)
+        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)
         RETURNING *
         `,
       [
@@ -77,6 +78,7 @@ app.post("/player", async (req, res) => {
         rebotes_por_partido,
         asistencias_por_partido,
         eficiencia,
+        imagen,
       ]
     );
 
@@ -146,7 +148,7 @@ app.use((req, res) => {
   });
 });
 
-const port = process.env.PORT || 5000
+const port = process.env.PORT || 5000;
 
 app.listen(port, () => {
   console.log(`servidor corriendo en el puerto ${port}`);
